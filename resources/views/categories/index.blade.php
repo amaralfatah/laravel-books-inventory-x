@@ -43,7 +43,7 @@
                     <table class="table table-hover mb-0">
                         <thead>
                         <tr>
-                            <th class="px-4">Title</th>
+                            <th class="px-4">Name</th>
                             <th class="px-4 text-end" style="width: 140px;">Actions</th>
                         </tr>
                         </thead>

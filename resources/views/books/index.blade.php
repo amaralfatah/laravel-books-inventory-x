@@ -76,7 +76,7 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="2" class="text-center py-4 text-muted">
+                                <td colspan="6" class="text-center py-4 text-muted">
                                     <i class="bi bi-inbox h4 d-block"></i>
                                     Tidak ada data kategori
                                 </td>
