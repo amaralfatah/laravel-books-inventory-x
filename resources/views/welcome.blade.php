@@ -7,9 +7,8 @@
         <h3>Dashboard</h3>
     </div>
 
-    {{-- Stats Cards --}}
     <div class="row g-3 mb-4">
-        {{-- Total Books --}}
+
         <div class="col-12 col-sm-6 col-lg-4">
             <div class="card  border-0 shadow-sm">
                 <div class="card-body">
@@ -19,7 +18,6 @@
             </div>
         </div>
 
-        {{-- Total Categories --}}
         <div class="col-12 col-sm-6 col-lg-4">
             <div class="card  border-0 shadow-sm">
                 <div class="card-body">
@@ -29,8 +27,6 @@
             </div>
         </div>
 
-
-        {{-- Popular Category --}}
         <div class="col-12 col-sm-6 col-lg-4">
             <div class="card  border-0 shadow-sm">
                 <div class="card-body">
@@ -41,9 +37,9 @@
         </div>
     </div>
 
-    {{-- Books by Category & Recent Books --}}
+
     <div class="row g-3">
-        {{-- Books by Category --}}
+
         <div class="col-12 col-lg-6">
             <div class="card border-0 shadow-sm h-100">
                 <div class="card-header bg-transparent py-3 d-flex justify-content-between align-items-center">
@@ -79,7 +75,6 @@
             </div>
         </div>
 
-        {{-- Recent Books --}}
         <div class="col-12 col-lg-6">
             <div class="card border-0 shadow-sm h-100">
                 <div class="card-header bg-transparent py-3 d-flex justify-content-between align-items-center">
