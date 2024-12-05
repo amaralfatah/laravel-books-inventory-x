@@ -3,88 +3,103 @@
 @section('title', 'Category Management')
 
 @section('content')
-    <div class="container-fluid px-4">
-        {{-- Search Form & Header --}}
-        <div class="mb-4 d-flex justify-content-between align-items-center">
-            <div>
-                <h3>Daftar Kategori</h3>
-            </div>
-            <div class="d-flex gap-3">
+
+    {{-- Search Form & Header --}}
+    <div class="mb-4">
+        <div class="mb-3">
+            <h3>Category List</h3>
+        </div>
+
+        <div class="row g-3">
+            <div class="col-12 col-lg-10">
                 <form action="{{ route('categories.index') }}" method="GET">
-                    <div class="input-group">
-                        <span class="input-group-text border-end-0">
-                            <i class="bi bi-search text-muted"></i>
-                        </span>
-                        <input type="text"
-                               name="search"
-                               class="form-control border-start-0"
-                               placeholder="Cari kategori..."
-                               value="{{ request('search') }}">
-                        <button class="btn btn-primary px-4" type="submit">
-                            <i class="bi bi-funnel me-1"></i>
-                            Filter
-                        </button>
+                    <div class="row g-2">
+                        <div class="col-12 col-sm-9">
+                            <div class="input-group">
+                           <span class="input-group-text border-end-0">
+                               <i class="bi bi-search text-muted"></i>
+                           </span>
+                                <input type="text"
+                                       name="search"
+                                       class="form-control border-start-0"
+                                       placeholder="Cari kategori..."
+                                       value="{{ request('search') }}">
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-sm-3">
+                            <button class="btn btn-primary w-100" type="submit">
+                                <i class="bi bi-funnel me-1"></i> Filter
+                            </button>
+                        </div>
                     </div>
                 </form>
+            </div>
+
+            <div class="col-12 col-lg-2">
                 <button type="button"
-                        class="btn btn-primary d-flex align-items-center"
+                        class="btn btn-primary w-100"
                         data-bs-toggle="modal"
                         data-bs-target="#addCategoryModal">
-                    <i class="bi bi-plus me-2"></i>
-                    Tambah
+                    <i class="bi bi-plus me-2"></i> Add
                 </button>
             </div>
         </div>
+    </div>
 
-        {{-- Main Content Card --}}
-        <div class="card border-0 shadow-sm">
-            <div class="card-body p-0">
-                <div class="table-responsive">
-                    <table class="table table-hover mb-0">
-                        <thead>
+    {{-- Main Content Card --}}
+    <div class="card border-0 shadow-sm">
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-hover mb-0">
+                    <thead>
+                    <tr>
+                        <th class="px-4">
+                            <a href="{{ route('categories.index', ['orderBy' => 'name', 'orderDirection' => request('orderDirection') === 'asc' ? 'desc' : 'asc'] + request()->except(['orderBy', 'orderDirection'])) }}">
+                                Name
+                            </a>
+                        </th>
+                        <th class="px-4 text-end" style="width: 140px;">Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @forelse ($datas as $category)
                         <tr>
-                            <th class="px-4">Name</th>
-                            <th class="px-4 text-end" style="width: 140px;">Actions</th>
+                            <td class="px-4">{{ $category->name }}</td>
+                            <td class="px-4 text-end">
+                                <div class="btn-group">
+                                    <button class="btn btn-outline-primary btn-sm"
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#editCategoryModal{{ $category->id }}">
+                                        <i class="bi bi-pencil"></i>
+                                    </button>
+                                    <button class="btn btn-outline-danger btn-sm"
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#deleteCategoryModal{{ $category->id }}">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                </div>
+                            </td>
                         </tr>
-                        </thead>
-                        <tbody>
-                        @forelse ($datas as $category)
-                            <tr>
-                                <td class="px-4">{{ $category->name }}</td>
-                                <td class="px-4 text-end">
-                                    <div class="btn-group">
-                                        <button class="btn btn-outline-primary btn-sm"
-                                                data-bs-toggle="modal"
-                                                data-bs-target="#editCategoryModal{{ $category->id }}">
-                                            <i class="bi bi-pencil"></i>
-                                        </button>
-                                        <button class="btn btn-outline-danger btn-sm"
-                                                data-bs-toggle="modal"
-                                                data-bs-target="#deleteCategoryModal{{ $category->id }}">
-                                            <i class="bi bi-trash"></i>
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>
-                        @empty
-                            <tr>
-                                <td colspan="2" class="text-center py-4 text-muted">
-                                    <i class="bi bi-inbox h4 d-block"></i>
-                                    Tidak ada data kategori
-                                </td>
-                            </tr>
-                        @endforelse
-                        </tbody>
-                    </table>
-                </div>
+                    @empty
+                        <tr>
+                            <td colspan="2" class="text-center py-4 text-muted">
+                                <i class="bi bi-inbox h4 d-block"></i>
+                                Tidak ada data kategori
+                            </td>
+                        </tr>
+                    @endforelse
+                    </tbody>
+                </table>
+            </div>
 
-                {{-- Pagination --}}
-                <div class="px-4 py-3 border-top">
-                    {{ $datas->links() }}
-                </div>
+            {{-- Pagination --}}
+            <div class="px-4 py-3 border-top">
+                {{ $datas->links() }}
             </div>
         </div>
     </div>
+
 
     {{-- ========== Modals Section ========== --}}
     {{-- Add Category Modal --}}
